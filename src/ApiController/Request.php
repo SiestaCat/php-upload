@@ -1,8 +1,7 @@
-<?php
+<?php declare( strict_types = 1 );
 
 namespace App\ApiController;
 
-use App\Document\Request as DocumentRequest;
 use App\Repository\RequestRepository;
 use App\Service\Api\RequestApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

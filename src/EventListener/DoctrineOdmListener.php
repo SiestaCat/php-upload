@@ -2,7 +2,6 @@
 
 namespace App\EventListener;
 
-use App\EventListener\Document\RequestListener;
 use Doctrine\ODM\MongoDB\Event\LifecycleEventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

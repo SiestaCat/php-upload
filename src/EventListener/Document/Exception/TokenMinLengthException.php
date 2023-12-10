@@ -1,7 +1,6 @@
-<?php
+<?php declare( strict_types = 1 );
 
 namespace App\EventListener\Document\Exception;
-
 
 class TokenMinLengthException extends \Exception
 {

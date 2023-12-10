@@ -4,8 +4,6 @@ namespace App\EventListener\Document;
 
 use App\Document\Request;
 use App\EventListener\Document\Exception\TokenMinLengthException;
-use Reflection;
-use ReflectionClass;
 
 class RequestListener
 {
