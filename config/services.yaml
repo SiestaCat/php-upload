@@ -46,3 +46,6 @@ services:
         public: true
         arguments:
             $token_length: '%env(int:UPLOAD_TOKEN_LENGTH)%'
+            $default_max_bytes: '%env(int:UPLOAD_MAX_BYTES)%'
+            $default_max_bytes_per_file: '%env(int:UPLOAD_MAX_BYTES_PER_FILE)%'
+            $default_max_files: '%env(int:UPLOAD_MAX_FILES)%'

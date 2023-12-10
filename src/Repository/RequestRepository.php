@@ -14,13 +14,9 @@ class RequestRepository extends ServiceDocumentRepository
         parent::__construct($registry, Request::class);
     }
 
-    public function create():Request
+    public function create(Request $document_request):void
     {
-        $document_request = new Request;
-
         $this->documentManager->persist($document_request);
         $this->documentManager->flush();
-
-        return $document_request;
     }
 }

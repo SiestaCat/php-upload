@@ -17,6 +17,15 @@ class Request
     #[MongoDB\Field(type: 'string')]
     public string $upload_token;
 
+    #[MongoDB\Field(type: 'int')]
+    public int $max_bytes;
+
+    #[MongoDB\Field(type: 'int')]
+    public int $max_bytes_per_file;
+
+    #[MongoDB\Field(type: 'int')]
+    public int $max_files;
+
     #[MongoDB\Field(type: 'date_immutable')]
     public ?DateTimeImmutable $date_created = null;
 
