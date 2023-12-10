@@ -3,3 +3,10 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+api:
+    resource:
+        path: ../src/ApiController/
+        namespace: App\ApiController
+    type: attribute
+    prefix: '/api/'
+    condition: "service('App\\\\Service\\\\AuthorizationTokenService').check(request)"
