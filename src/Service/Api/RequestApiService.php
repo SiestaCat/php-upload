@@ -16,7 +16,7 @@ class RequestApiService
 
     public function getDocumentFromJson(mixed $input_json):Request
     {
-        $document_request = (new \ReflectionClass(Request::class))->newInstanceWithoutConstructor();
+        $document_request = new Request;
 
         if(!(is_object($input_json) && get_class($input_json) === \stdClass::class)) return $document_request;
 
