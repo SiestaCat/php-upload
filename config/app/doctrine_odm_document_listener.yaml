@@ -1,0 +1,3 @@
+parameters:
+  doctrine_odm_document_listener:
+    App\Document\Request: App\EventListener\Document\RequestListener

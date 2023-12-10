@@ -24,6 +24,5 @@ class Request
     public function onPrePersist()
     {
         $this->date_created = new DateTimeImmutable;
-        $this->upload_token = \IcyApril\CryptoLib::randomString(64);
     }
 }
