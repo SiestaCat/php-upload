@@ -6,8 +6,6 @@
 parameters:
     env(MONGODB_URL): ''
     env(MONGODB_DB): ''
-imports:
-    - { resource: app/doctrine_odm_document_listener.yaml }
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -28,20 +26,6 @@ services:
     App\Service\AuthorizationTokenService:
         arguments:
             $token: '%env(string:API_AUTHORIZATION_TOKEN)%'
-    Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
-    App\EventListener\DoctrineOdmListener:
-        tags:
-            -  { name: doctrine_mongodb.odm.event_listener, event: preRemove }
-            -  { name: doctrine_mongodb.odm.event_listener, event: postRemove }
-            -  { name: doctrine_mongodb.odm.event_listener, event: prePersist }
-            -  { name: doctrine_mongodb.odm.event_listener, event: postPersist }
-            -  { name: doctrine_mongodb.odm.event_listener, event: preUpdate }
-            -  { name: doctrine_mongodb.odm.event_listener, event: postUpdate }
-            -  { name: doctrine_mongodb.odm.event_listener, event: preLoad }
-            -  { name: doctrine_mongodb.odm.event_listener, event: postLoad }
-        arguments:
-          $documents_listeners: '%doctrine_odm_document_listener%'
-          $container: '@service_container'
     App\EventListener\Document\RequestListener:
         public: true
         arguments:

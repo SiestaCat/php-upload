@@ -5,10 +5,13 @@ namespace App\Document;
 use DateTimeImmutable;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use App\Repository\RequestRepository;
+use App\EventListener\Document\RequestListener;
+use Siestacat\DoctrineOdmEventListener\EventListenerAttribute;
 
 #[MongoDB\Document(collection: 'upload_api_request', repositoryClass: RequestRepository::class)]
 #[MongoDB\HasLifecycleCallbacks]
 #[MongoDB\Index(['date_created'])]
+#[EventListenerAttribute([RequestListener::class])]
 class Request
 {
     #[MongoDB\Id]
