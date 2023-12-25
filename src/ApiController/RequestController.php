@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/request', name: 'api_request')]
-class Request extends AbstractController
+class RequestController extends AbstractController
 {
 
     public function __construct
