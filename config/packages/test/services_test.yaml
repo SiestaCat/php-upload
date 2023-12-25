@@ -1,0 +1,2 @@
+parameters:
+  api_token: '%env(string:API_AUTHORIZATION_TOKEN)%'
