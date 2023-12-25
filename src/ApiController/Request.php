@@ -27,7 +27,8 @@ class Request extends AbstractController
         {
             $document_request = $this->requestApiService->getDocumentFromJson(json_decode($this->requestStack->getCurrentRequest()->getContent(), true));
 
-            $this->requestRepository->create($document_request);
+            $this->requestRepository->documentManager->persist($document_request);
+            $this->requestRepository->documentManager->flush();
 
             return new JsonResponse(['upload_token' => $document_request->upload_token]);
         }
