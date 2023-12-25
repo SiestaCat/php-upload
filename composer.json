@@ -1,4 +1,6 @@
 {
+    "name": "siestacat/symfony-intermediary-upload",
+    "description": "Symfony intermediary upload",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
