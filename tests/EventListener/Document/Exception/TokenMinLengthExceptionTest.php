@@ -1,6 +1,6 @@
 <?php declare( strict_types = 1 );
 
-namespace App\EventListener\Document\Exception\Tests;
+namespace App\EventListener\Document\Test\Exception;
 use PHPUnit\Framework\TestCase;
 use App\EventListener\Document\Exception\TokenMinLengthException;
 use App\EventListener\Document\RequestListener;
