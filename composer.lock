@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f190c03cf21108d249b5aba345ea16d",
+    "content-hash": "79500cbc501a6bf452ae4935f645566b",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1841,6 +1841,49 @@
                 "source": "https://github.com/SiestaCat/doctrine-odm-event-listener/tree/1.0.0"
             },
             "time": "2023-12-25T18:58:08+00:00"
+        },
+        {
+            "name": "siestacat/symfony-json-error-response",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SiestaCat/symfony-json-error-response.git",
+                "reference": "c8663eb31d4a818b68a9a4a455214c58b4c21d68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SiestaCat/symfony-json-error-response/zipball/c8663eb31d4a818b68a9a4a455214c58b4c21d68",
+                "reference": "c8663eb31d4a818b68a9a4a455214c58b4c21d68",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "symfony/framework-bundle": "^6.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siestacat\\SymfonyJsonErrorResponse\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "SiestaCat"
+                }
+            ],
+            "description": "Return a JsonResponse with error message or exception",
+            "support": {
+                "issues": "https://github.com/SiestaCat/symfony-json-error-response/issues",
+                "source": "https://github.com/SiestaCat/symfony-json-error-response/tree/1.0.4"
+            },
+            "time": "2023-11-23T18:33:37+00:00"
         },
         {
             "name": "symfony/cache",

@@ -13,4 +13,9 @@ class RequestRepository extends ServiceDocumentRepository
     {
         parent::__construct($registry, Request::class);
     }
+
+    public function getByToken(string $upload_token):?Request
+    {
+        return $this->findOneBy(['upload_token' => $upload_token]);
+    }
 }

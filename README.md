@@ -8,3 +8,12 @@ curl -X GET 'http://localhost:8000/api/request' \
   -H 'Content-Type: application/json'  \
   --compressed -L
 ```
+
+Upload files:
+
+```
+curl 'http://localhost:8000/upload/gPAtMzuoeMREJffnMSBVz3IWo0pa282ZT4ZjXkTkQhfJPiGraNoDS2RwWUPdgAyY' \
+  -F 'files[]=@composer.json' \
+  -F 'files[]=@composer.lock' \
+  --compressed -L
+```
