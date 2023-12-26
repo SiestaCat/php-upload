@@ -10,6 +10,7 @@ use Siestacat\DoctrineOdmEventListener\EventListenerAttribute;
 
 #[MongoDB\Document(collection: 'upload_api_request', repositoryClass: RequestRepository::class)]
 #[MongoDB\HasLifecycleCallbacks]
+#[MongoDB\Index(['upload_token', 'uploaded'])]
 #[MongoDB\Index(['date_created'])]
 #[EventListenerAttribute([RequestListener::class])]
 class Request
@@ -31,6 +32,12 @@ class Request
 
     #[MongoDB\Field(type: 'date_immutable')]
     public ?DateTimeImmutable $date_created = null;
+
+    #[MongoDB\Field(type: 'bool')]
+    public bool $uploaded = false;
+
+    #[MongoDB\Field(type: 'date_immutable')]
+    public ?DateTimeImmutable $date_uploaded = null;
 
     #[MongoDB\PrePersist]
     public function onPrePersist()
