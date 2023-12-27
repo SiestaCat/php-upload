@@ -6,7 +6,6 @@ use App\Service\Upload\FileSizeValidatorService;
 use App\Tests\CommonTestMethods;
 use PHPUnit\Framework\TestCase;
 
-
 class FileSizeValidatorServiceTest extends TestCase
 {
     public function test(): void

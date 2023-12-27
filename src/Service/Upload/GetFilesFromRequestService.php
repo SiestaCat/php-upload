@@ -15,7 +15,7 @@ class GetFilesFromRequestService
      */
     public function get(Request $request): array
     {
-        $files = $request->files->all();
+        $files = $request->files ? $request->files->all() : [];
 
         return array_key_exists(self::FILES_INPUT_NAME, $files) ? $files[self::FILES_INPUT_NAME] : [];
     }

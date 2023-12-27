@@ -6,7 +6,6 @@ use App\Service\Upload\CalculateTotalSizeService;
 use App\Tests\CommonTestMethods;
 use PHPUnit\Framework\TestCase;
 
-
 class CalculateTotalSizeServiceTest extends TestCase
 {
     public function test(): void
