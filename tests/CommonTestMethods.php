@@ -22,14 +22,19 @@ final class CommonTestMethods
 
         for($i=1;$i<=$count;$i++)
         {
-            $files[] = new UploadedFile
-            (
-                RandomFileGenerator::generate(null, null, $each_file_size),
-                strval(u(self::getFaker()->words(5,true))->snake()) . '.' . self::getFaker()->fileExtension()
-            );
+            $files[] = self::genRandomUploadedFile($each_file_size);
         }
 
         return $files;
+    }
+
+    public static function genRandomUploadedFile(int $size):UploadedFile
+    {
+        return new UploadedFile
+        (
+            RandomFileGenerator::generate(null, null, $size),
+            strval(u(self::getFaker()->words(5,true))->snake()) . '.' . self::getFaker()->fileExtension()
+        );
     }
 
     public static function getFaker():Generator
