@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Document\File;
 use App\Repository\FileRepository;
 use App\Repository\RequestRepository;
+use App\Service\FileStorageService;
 use App\Service\Upload\CalculateTotalSizeService;
 use App\Service\Upload\FileSizeValidatorService;
 use App\Service\Upload\GetFilesFromRequestService;
@@ -23,7 +25,8 @@ class UploadController extends JsonErrorResponse
         private RequestStack $requestStack,
         private GetFilesFromRequestService $getFilesFromRequestService,
         private CalculateTotalSizeService $calculateTotalSizeService,
-        private FileSizeValidatorService $fileSizeValidatorService
+        private FileSizeValidatorService $fileSizeValidatorService,
+        private FileStorageService $fileStorageService
     ){}
 
     #[Route('/{upload_token}', name: '')]
@@ -31,7 +34,7 @@ class UploadController extends JsonErrorResponse
     {
         try
         {
-            $document_request = $this->requestRepository->getPendingUploadByToken($upload_token);
+            $document_request = $this->requestRepository->getPendingByUploadByToken($upload_token);
 
             if($document_request === null)
             {
@@ -62,7 +65,12 @@ class UploadController extends JsonErrorResponse
                     return $this->json_error_message('max_bytes_per_file_reached');
                 }
 
-                $this->fileRepository->create($document_request, $file);
+                $document_file = $this->fileRepository->create($document_request, $file);
+
+                if(!$this->fileStorageService->writeFromLocal($file->getRealPath(), $document_file))
+                {
+                    return $this->json_error_message('unknow_error');
+                }
             }
 
             $this->fileRepository->documentManager->flush();

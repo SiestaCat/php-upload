@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileRepository extends ServiceDocumentRepository
 {
-    public function __construct(public DocumentManager $documentManager, ManagerRegistry $registry, private string $hash_algo)
+    public function __construct(public DocumentManager $documentManager, ManagerRegistry $registry, private string $hash_algo, private RequestRepository $requestRepository)
     {
         parent::__construct($registry, File::class);
     }
@@ -32,14 +32,21 @@ class FileRepository extends ServiceDocumentRepository
 
     public function getCountByRequest(Request $document_request):int
     {
-
-        $attached_document_request = $this->documentManager->getRepository(Request::class)->find($document_request->id);
-
         return $this->documentManager->createQueryBuilder(File::class)
-            ->field('request')->equals($attached_document_request)
+            ->field('request')->equals($this->requestRepository->getAttached($document_request))
             ->count()
             ->getQuery()
             ->execute();
+    }
 
+    /**
+     * @return File[]
+     */
+    public function getListByRequest(Request $document_request):array
+    {
+        return $this->documentManager->createQueryBuilder(File::class)
+            ->field('request')->equals($this->requestRepository->getAttached($document_request))
+            ->getQuery()
+            ->execute();
     }
 }

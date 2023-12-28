@@ -14,7 +14,7 @@ curl -X GET 'http://localhost:8000/api/request' \
 Upload files:
 
 ```
-curl 'http://localhost:8000/upload/8Q9skEQCROEc4WK36adc7zmeYZXJGFGlz9unw7zBw8PeSUyLXn5NxAt4bP5tNxGo' \
+curl -X POST 'http://localhost:8000/upload/DWBW1fQhX8XHAZcI2yTG3XDogYU68R5zd7G2B5WQrUElO7Z7EyEuK1wGK4VnAp8v' \
   -F 'files[]=@composer.json' \
   -F 'files[]=@composer.lock' \
   --compressed -L

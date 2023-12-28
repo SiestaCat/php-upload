@@ -36,3 +36,6 @@ services:
     App\Repository\FileRepository:
         arguments:
             $hash_algo: '%env(string:FILE_HASH_ALGO)%'
+    App\Service\FileStorageService:
+        arguments:
+            $hash_algo: '%env(string:FILE_HASH_ALGO)%'
