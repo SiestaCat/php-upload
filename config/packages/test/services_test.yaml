@@ -1,3 +1,10 @@
 parameters:
   api_token: '%env(string:API_AUTHORIZATION_TOKEN)%'
   hash_algo: '%env(string:FILE_HASH_ALGO)%'
+services:
+  _defaults:
+      public: true
+
+  test.App\Service\Api\GetFilesApiService: '@App\Service\Api\GetFilesApiService'
+  test.App\Repository\RequestRepository: '@App\Repository\RequestRepository'
+  test.App\Repository\FileRepository: '@App\Repository\FileRepository'

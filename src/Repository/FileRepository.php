@@ -42,7 +42,7 @@ class FileRepository extends ServiceDocumentRepository
     /**
      * @return File[]
      */
-    public function getListByRequest(Request $document_request):array
+    public function getListByRequest(Request $document_request):iterable
     {
         return $this->documentManager->createQueryBuilder(File::class)
             ->field('request')->equals($this->requestRepository->getAttached($document_request))
