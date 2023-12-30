@@ -65,12 +65,19 @@ class UploadController extends JsonErrorResponse
                     return $this->json_error_message('max_bytes_per_file_reached');
                 }
 
-                $document_file = $this->fileRepository->create($document_request, $file);
+                $document_file = $this->fileRepository->create($document_request, $file, false);
+
+                if($this->fileStorageService->exists($document_file))
+                {
+                    continue;
+                }
 
                 if(!$this->fileStorageService->writeFromLocal($file->getRealPath(), $document_file))
                 {
                     return $this->json_error_message('unknow_error');
                 }
+
+                $this->fileRepository->documentManager->persist($document_file);
             }
 
             $this->fileRepository->documentManager->flush();

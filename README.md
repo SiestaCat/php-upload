@@ -14,7 +14,7 @@ curl -X GET 'http://localhost:8000/api/request' \
 Upload files:
 
 ```
-curl -X POST 'http://localhost:8000/upload/OP5hzlHbZ3HmACA4SI3SivnRl9sLe6eEQHcwFX0u1m9hPgfgY5OolQnRkoRsb0S0' \
+curl -X POST 'http://localhost:8000/upload/oqNrpZA53szywC6bhbYEFEjZwqFZYnJRGyZq0sMb1nFJ5SMPcw1qBDP1F4NsRkJv' \
   -F 'files[]=@composer.json' \
   -F 'files[]=@composer.lock' \
   --compressed -L
@@ -23,8 +23,16 @@ curl -X POST 'http://localhost:8000/upload/OP5hzlHbZ3HmACA4SI3SivnRl9sLe6eEQHcwF
 Get files:
 
 ```
-curl -X GET 'http://localhost:8000/api/files/OP5hzlHbZ3HmACA4SI3SivnRl9sLe6eEQHcwFX0u1m9hPgfgY5OolQnRkoRsb0S0' \
+curl -X GET 'http://localhost:8000/api/files/oqNrpZA53szywC6bhbYEFEjZwqFZYnJRGyZq0sMb1nFJ5SMPcw1qBDP1F4NsRkJv' \
   -H 'Authorization: Basic changeme' \
   -H 'Content-Type: application/json'  \
+  --compressed -L
+```
+
+Download single file:
+
+```
+curl -X GET 'http://localhost:8000/api/download/oqNrpZA53szywC6bhbYEFEjZwqFZYnJRGyZq0sMb1nFJ5SMPcw1qBDP1F4NsRkJv/4ec879f02769878f999425367bf5a2eaf0bdb7916b56a92a3be6cf5aa72add5217b5309f876c5c7f89dd4e9250c922479572da5e0c5edc654b8778b6c6dde69f' \
+  -H 'Authorization: Basic changeme' \
   --compressed -L
 ```
