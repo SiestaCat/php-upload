@@ -18,7 +18,7 @@ class RequestListener
         private int $default_max_files
     ){}
 
-    public function postPersist(Request $document_request): void
+    public function prePersist(Request $document_request): void
     {
         $this->checkTokenLenght();
 

@@ -10,16 +10,16 @@ use App\EventListener\Document\RequestListener;
 class RequestListenerTest extends TestCase
 {
     /**
-     * @dataProvider postPersistProvider
+     * @dataProvider prePersistProvider
      */
-    public function testPostPersist(?int $default_max_bytes, ?int $default_max_bytes_per_file, ?int $default_max_files): void
+    public function testprePersist(?int $default_max_bytes, ?int $default_max_bytes_per_file, ?int $default_max_files): void
     {
         $token_length = 12;
 
         $document_request = new Request;
         
         (new RequestListener($token_length, $default_max_bytes?:0, $default_max_bytes_per_file?:0, $default_max_files?:0))
-        ->postPersist($document_request);
+        ->prePersist($document_request);
 
         $this->assertEquals($token_length, strlen($document_request->upload_token));
 
@@ -36,7 +36,7 @@ class RequestListenerTest extends TestCase
         (new RequestListener(RequestListener::TOKEN_LENGTH_MIN - 1, 0, 0, 0))->checkTokenLenght();
     }
 
-    public function postPersistProvider()
+    public function prePersistProvider()
     {
         $arr = [];
 

@@ -13,4 +13,29 @@ class RequestRepository extends ServiceDocumentRepository
     {
         parent::__construct($registry, Request::class);
     }
+
+    public function getByUploadByToken(string $upload_token):?Request
+    {
+        return $this->findOneBy(['upload_token' => $upload_token]);
+    }
+
+    public function getPendingByUploadByToken(string $upload_token):?Request
+    {
+        return $this->findOneBy(['upload_token' => $upload_token, 'uploaded' => false]);
+    }
+
+    public function setUploaded(Request $document_request):void
+    {
+        $this->documentManager->createQueryBuilder(Request::class)
+        ->findAndUpdate()
+        ->field('id')->equals($document_request->id)
+        ->field('uploaded')->set(true)
+        ->getQuery()
+        ->execute();
+    }
+
+    public function getAttached(Request $document_request):Request
+    {
+        return $this->find($document_request->id);
+    }
 }
