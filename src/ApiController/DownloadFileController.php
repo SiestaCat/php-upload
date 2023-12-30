@@ -45,7 +45,7 @@ class DownloadFileController extends JsonErrorResponse
 
         $resource = $this->fileStorageService->getStream($document_file);
 
-        return (new StreamedResponse())->setCallback(function () use ($resource): void {
+        $response = (new StreamedResponse())->setCallback(function () use ($resource): void {
             while (!feof($resource))
             {
                 echo fread($resource, 1024);
@@ -54,5 +54,9 @@ class DownloadFileController extends JsonErrorResponse
             fclose($resource);
         });
 
+        $this->fileRepository->documentManager->remove($document_file);
+        $this->fileRepository->documentManager->flush();
+
+        return $response;
     }
 }

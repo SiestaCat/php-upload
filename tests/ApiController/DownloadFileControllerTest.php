@@ -44,11 +44,13 @@ class DownloadFileControllerTest extends WebTestCase
         {
             $this->client->followRedirects(true);
 
-            $this->client->request('GET', '/api/download/' . $file->request->upload_token . '/' . $file->hash, [], [], [
+            $crawler = $this->client->request('GET', '/api/download/' . $file->request->upload_token . '/' . $file->hash, [], [], [
                 'HTTP_Authorization' => sprintf('Basic %s', $this->container->getParameter('api_token'))
             ]);
 
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+            $this->assertFalse($this->fileStorageService->exists($file));
         }
     }
 
