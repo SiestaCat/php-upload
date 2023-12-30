@@ -9,12 +9,9 @@ use App\Repository\RequestRepository;
 use App\Service\Api\GetFilesApiService;
 use App\Tests\CommonTestMethods;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class GetFilesApiServiceTest extends KernelTestCase
 {
-    private ContainerInterface $container;
-
     private GetFilesApiService $service;
 
     private RequestRepository $request_repository;
@@ -25,11 +22,11 @@ class GetFilesApiServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $this->container = self::$kernel->getContainer();
+        $container = self::$kernel->getContainer();
 
-        $this->service = $this->container->get('test.' . GetFilesApiService::class);
-        $this->request_repository = $this->container->get('test.' . RequestRepository::class);
-        $this->file_repository = $this->container->get('test.' . FileRepository::class);
+        $this->service = $container->get('test.' . GetFilesApiService::class);
+        $this->request_repository = $container->get('test.' . RequestRepository::class);
+        $this->file_repository = $container->get('test.' . FileRepository::class);
     }
 
     public function test():void
@@ -52,6 +49,8 @@ class GetFilesApiServiceTest extends KernelTestCase
         foreach($files_documents as $index => $document_file)
         {
             $file_object = $files[$index];
+
+            $this->assertTrue(get_class($file_object) === \stdClass::class);
 
             $this->assertEquals($document_file->filename, $file_object->filename);
             $this->assertEquals($document_file->hash, $file_object->hash);

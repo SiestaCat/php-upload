@@ -4,7 +4,7 @@ namespace App\Tests\ApiController;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class RequestController extends WebTestCase
+class RequestControllerTest extends WebTestCase
 {
     public function test():void
     {
@@ -28,8 +28,6 @@ class RequestController extends WebTestCase
         $is_object = is_object($json_response);
 
         $this->assertTrue($is_object, sprintf('JSON decode from str: %s', $str_response));
-
-        if(!$is_object) return;
 
         $this->assertTrue(property_exists($json_response, 'upload_token'), 'Check if property "upload_token" exists in json');
     }
