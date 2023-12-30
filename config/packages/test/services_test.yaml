@@ -8,3 +8,4 @@ services:
   test.App\Service\Api\GetFilesApiService: '@App\Service\Api\GetFilesApiService'
   test.App\Repository\RequestRepository: '@App\Repository\RequestRepository'
   test.App\Repository\FileRepository: '@App\Repository\FileRepository'
+  test.App\Service\FileStorageService: '@App\Service\FileStorageService'

@@ -24,6 +24,8 @@ class FileStorageServiceTest extends KernelTestCase
 
         $container = self::$kernel->getContainer();
 
+        $this->service = $container->get('test.' . FileStorageService::class);
+
         $this->hash_algo = $container->getParameter('hash_algo');
     }
 
@@ -36,21 +38,11 @@ class FileStorageServiceTest extends KernelTestCase
     {
         $document_file = $this->writeFile();
 
-        $stream = $this->getService()->getStream($document_file);
+        $stream = $this->service->getStream($document_file);
 
         $this->assertEquals($document_file->hash, hash($this->hash_algo, stream_get_contents($stream)));
 
         $this->delete($document_file);
-    }
-
-    private function getService():FileStorageService
-    {
-        if($this->service === null)
-        {
-            $this->service = new FileStorageService(new \League\Flysystem\Filesystem(new \League\Flysystem\InMemory\InMemoryFilesystemAdapter()), $this->hash_algo);
-        }
-
-        return $this->service;
     }
 
     private function getDocumentFile(string $local_path):File
@@ -74,13 +66,13 @@ class FileStorageServiceTest extends KernelTestCase
 
         $document_file = $this->getDocumentFile($local_path);
 
-        $this->assertTrue($this->getService()->writeFromLocal($local_path, $document_file));
+        $this->assertTrue($this->service->writeFromLocal($local_path, $document_file));
 
         return $document_file;
     }
 
     private function delete(File $document_file):void
     {
-        $this->assertTrue($this->getService()->delete($document_file));
+        $this->assertTrue($this->service->delete($document_file));
     }
 }

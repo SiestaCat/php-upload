@@ -16,7 +16,7 @@ class FileRepository extends ServiceDocumentRepository
         parent::__construct($registry, File::class);
     }
 
-    public function create(Request $document_request, UploadedFile $uploaded_file):File
+    public function create(Request $document_request, UploadedFile $uploaded_file, bool $persist = true):File
     {
         $file = new File;
         $file->request = $document_request;
@@ -25,9 +25,14 @@ class FileRepository extends ServiceDocumentRepository
         $file->size = $uploaded_file->getSize();
         $file->mime = $uploaded_file->getMimeType();
 
-        $this->documentManager->persist($file);
+        if($persist) $this->documentManager->persist($file);
 
         return $file;
+    }
+
+    public function getFileByRequestAndHash(Request $document_request, string $hash):?File
+    {
+        return $this->findOneBy(['request' => $document_request, 'hash' => $hash]);
     }
 
     public function getCountByRequest(Request $document_request):int
