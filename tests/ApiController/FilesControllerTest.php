@@ -23,7 +23,7 @@ class FilesControllerTest extends WebTestCase
 
     public function setUp(): void
     {
-        $this->client = $client = static::createClient();
+        $this->client = static::createClient();
 
         $this->container = $this->client->getContainer();
 
