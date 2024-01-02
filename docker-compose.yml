@@ -7,5 +7,7 @@ services:
     image: php_upload_api_web_server:latest
     environment:
       - APP_ENV=prod
+      - SSL_MODE=off
+      - MONGODB_URL=mongodb://mongo:27017
     ports:
       - 8000:80

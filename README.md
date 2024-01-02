@@ -49,6 +49,10 @@ docker build \
     .
 ```
 
+Docker compose up:
+
+`docker compose up`
+
 Docker run:
 
 `docker run -e SSL_MODE=off -e APP_ENV=prod -p 8000:80 php_upload_api_web_server:latest`
