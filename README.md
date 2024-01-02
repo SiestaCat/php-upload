@@ -36,3 +36,19 @@ curl -X GET 'http://localhost:8000/api/download/oqNrpZA53szywC6bhbYEFEjZwqFZYnJR
   -H 'Authorization: Basic changeme' \
   --compressed -L
 ```
+
+
+Docker build:
+
+```
+docker build \
+    -t php_upload_api_web_server:latest \
+    --progress plain \
+    --no-cache \
+    --file ./Dockerfile \
+    .
+```
+
+Docker run:
+
+`docker run -e SSL_MODE=off -e APP_ENV=prod -p 8000:80 php_upload_api_web_server:latest`
