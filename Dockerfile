@@ -11,7 +11,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR ${APP_PATH}
 
-RUN rm -rf ${APP_PATH}/*
+RUN mkdir -p ${APP_PATH}/flysystem/storage/default
 
 COPY . ${APP_PATH}
 RUN chown -R webuser:webgroup ${APP_PATH}
