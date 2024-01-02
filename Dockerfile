@@ -13,13 +13,10 @@ WORKDIR ${APP_PATH}
 
 RUN rm -rf ${APP_PATH}/*
 
-COPY .git ${APP_PATH}/.git
+COPY . ${APP_PATH}
 RUN chown -R webuser:webgroup ${APP_PATH}
 
 USER webuser
-
-RUN git config --global --add safe.directory ${APP_PATH}
-RUN git reset --hard
 
 RUN composer install --no-scripts --no-dev
 
