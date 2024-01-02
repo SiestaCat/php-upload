@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo:latest
+  symfony:
+    image: php_upload_api_web_server:latest
+    environment:
+      - APP_ENV=prod
+    ports:
+      - 8000:80

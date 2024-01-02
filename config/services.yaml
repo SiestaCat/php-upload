@@ -4,8 +4,14 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    env(MONGODB_URL): ''
-    env(MONGODB_DB): ''
+    env(MONGODB_URL): 'mongodb://mongo:27017'
+    env(MONGODB_DB): 'php_upload_api'
+    env(UPLOAD_TOKEN_LENGTH): 64
+    env(UPLOAD_MAX_BYTES): 100000000
+    env(UPLOAD_MAX_BYTES_PER_FILE): 10000000
+    env(UPLOAD_MAX_FILES): 10
+    env(FILE_HASH_ALGO): 'sha512'
+    
 services:
     # default configuration for services in *this* file
     _defaults:
