@@ -43,6 +43,11 @@ class UploadController extends JsonErrorResponse
 
             $files = $this->getFilesFromRequestService->get($this->requestStack->getCurrentRequest());
 
+            if(count($files) === 0)
+            {
+                return $this->json_error_message('no_files');
+            }
+
             if(count($files) > $document_request->max_files)
             {
                 return $this->json_error_message('max_files_reached');
