@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 use Siestacat\SymfonyJsonErrorResponse\JsonErrorResponse;
+use Psr\Log\LoggerInterface;
 
 #[Route('/upload', name: 'upload')]
 class UploadController extends JsonErrorResponse
@@ -26,7 +27,8 @@ class UploadController extends JsonErrorResponse
         private GetFilesFromRequestService $getFilesFromRequestService,
         private CalculateTotalSizeService $calculateTotalSizeService,
         private FileSizeValidatorService $fileSizeValidatorService,
-        private FileStorageService $fileStorageService
+        private FileStorageService $fileStorageService,
+        private LoggerInterface $logger
     ){}
 
     #[Route('/{upload_token}', name: '')]
@@ -100,6 +102,7 @@ class UploadController extends JsonErrorResponse
         }
         catch(\Exception $e)
         {
+            $this->logger->error($e, ['trace' => $e->getTraceAsString()]);
             return $this->json_error($e);
         }
     }
