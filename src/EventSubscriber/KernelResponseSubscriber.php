@@ -18,6 +18,7 @@ class KernelResponseSubscriber implements EventSubscriberInterface
 
     public function onKernelResponse(ResponseEvent $event):void
     {
+        return;//Dsiabled, Not working
         if($event->getRequest()->getMethod() === 'OPTIONS')
         {
             $event->setResponse
