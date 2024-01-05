@@ -47,6 +47,3 @@ services:
     App\Service\FileStorageService:
         arguments:
             $hash_algo: '%env(string:FILE_HASH_ALGO)%'
-    App\EventSubscriber\KernelResponseSubscriber:
-        tags:
-            - { name: kernel.event_subscriber }
