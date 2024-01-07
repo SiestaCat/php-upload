@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Document\File;
+use App\Document\Request;
 use App\Repository\FileRepository;
 use App\Repository\RequestRepository;
 use App\Service\FileStorageService;
@@ -31,7 +32,7 @@ class UploadController extends JsonErrorResponse
         private LoggerInterface $logger
     ){}
 
-    #[Route('/{upload_token}', name: '')]
+    #[Route('/{upload_token}', name: '', methods: ['POST'])]
     public function index(string $upload_token):JsonResponse
     {
         try
@@ -98,6 +99,8 @@ class UploadController extends JsonErrorResponse
 
             $this->requestRepository->setUploaded($document_request);
 
+            $this->sendWebHook($document_request);
+
             return new JsonResponse(['success' => true]);
         }
         catch(\Exception $e)
@@ -105,5 +108,27 @@ class UploadController extends JsonErrorResponse
             $this->logger->error($e, ['trace' => $e->getTraceAsString()]);
             return $this->json_error($e);
         }
+    }
+
+    private function sendWebHook(Request $document_request):void
+    {
+
+        if($document_request->webhook_upload === null) return;
+
+        $curl = curl_init();
+
+        $post = [
+            'upload_token' => $document_request->upload_token
+        ];
+
+        curl_setopt($curl, CURLOPT_URL, $document_request->webhook_upload);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+
+        curl_exec($curl);
+
+        curl_close($curl);
     }
 }

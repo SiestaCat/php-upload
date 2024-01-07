@@ -1,6 +1,7 @@
 parameters:
   api_token: '%env(string:API_AUTHORIZATION_TOKEN)%'
   hash_algo: '%env(string:FILE_HASH_ALGO)%'
+  webhook_upload_base_url: '%env(string:WEBHOOK_UPLOAD_BASE_URL)%'
 services:
   _defaults:
       public: true

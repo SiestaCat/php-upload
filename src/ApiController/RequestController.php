@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/request', name: 'api_request', methods: ['GET'])]
+#[Route('/request', name: 'api_request', methods: ['POST'])]
 class RequestController extends AbstractController
 {
 

@@ -5,7 +5,7 @@ Run tests: `php bin/phpunit`
 Request upload token:
 
 ```
-curl -X GET 'http://localhost:8000/api/request' \
+curl -X POST 'http://localhost:8000/api/request' \
   -H 'Authorization: Basic changeme' \
   -H 'Content-Type: application/json'  \
   --compressed -L
@@ -56,3 +56,9 @@ Docker compose up:
 Docker run:
 
 `docker run -e SSL_MODE=off -e APP_ENV=prod -p 8000:80 php_upload_api_web_server:latest`
+
+Start webhook test server (before run phpunit):
+
+See `WEBHOOK_UPLOAD_BASE_URL` env var in .env.test
+
+`docker run -it --init -v ${PWD}/webhook_test.js:/usr/src/app/server.js -w /usr/src/app -p 9002:3000 node:latest node server.js`

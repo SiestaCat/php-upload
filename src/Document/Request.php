@@ -39,6 +39,9 @@ class Request
     #[MongoDB\Field(type: 'date_immutable')]
     public ?DateTimeImmutable $date_uploaded = null;
 
+    #[MongoDB\Field(type: 'string')]
+    public ?string $webhook_upload = null;
+
     #[MongoDB\PrePersist]
     public function onPrePersist()
     {

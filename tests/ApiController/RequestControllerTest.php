@@ -14,7 +14,7 @@ class RequestControllerTest extends WebTestCase
 
         $container = $client->getContainer();
 
-         $client->request('GET', '/api/request', [], [], [
+        $client->request('POST', '/api/request/', [], [], [
             'HTTP_Content-Type' => 'application/json',
             'HTTP_Authorization' => sprintf('Basic %s', $container->getParameter('api_token'))
         ]);

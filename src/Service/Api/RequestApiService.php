@@ -21,12 +21,14 @@ class RequestApiService
 
         if(!(is_object($input_json) && get_class($input_json) === \stdClass::class)) return $document_request;
 
-        foreach($int_params as $param_name) $this->populateIntParam($param_name, $input_json, $document_request);
+        foreach($int_params as $param_name) $this->populateParam($param_name, $input_json, $document_request, 'integer');
+
+        $this->populateParam('webhook_upload', $input_json, $document_request, 'string');
 
         return $document_request;
     }
 
-    private function populateIntParam(string $param_name, \stdClass $input_json, Request $document_request):void
+    private function populateParam(string $param_name, \stdClass $input_json, Request $document_request, string $type):void
     {
         if(!property_exists($input_json, $param_name)) return;
 
@@ -34,9 +36,9 @@ class RequestApiService
 
         $param_value = $input_json->{$param_name};
 
-        if(is_float($param_value)) $param_value = intval($param_value);
+        if($type === 'integer' && is_float($param_value)) $param_value = intval($param_value);
 
-        if(!is_int($param_value)) throw new \TypeError(sprintf('Param %s should be int', $param_name));
+        if(gettype($param_value) !== $type) throw new \TypeError(sprintf('Param %s should be %s', $param_name, $type));
 
         $document_request->{$param_name} = $param_value;
     }
